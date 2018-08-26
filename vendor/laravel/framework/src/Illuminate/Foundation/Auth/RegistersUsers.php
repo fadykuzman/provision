@@ -2,8 +2,6 @@
 
 namespace Illuminate\Foundation\Auth;
 
-use App\Mail\Welcome;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
@@ -35,8 +33,6 @@ trait RegistersUsers
         event(new Registered($user = $this->create($request->all())));
 
         $this->guard()->login($user);
-
-        \Mail::to($user)->send(new Welcome($user));
 
         return $this->registered($request, $user)
                         ?: redirect($this->redirectPath());
