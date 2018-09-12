@@ -82,7 +82,7 @@
                     </div>
                     @else
                     <div class="card-body">
-                        You are subscribed to: {{$plan->nickname}}
+                        {{$user->name}}, you now budget like a {{$plan->nickname}}
                     </div>
                     <div class="card-body">
                       <a href="/subscriptions"
