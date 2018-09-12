@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Template'),
+    'name' => env('APP_NAME', 'Planet Budget'),
 
     /*
     |--------------------------------------------------------------------------
@@ -150,6 +150,7 @@ return [
         /*
          * Package Service Providers...
          */
+         Laravel\Cashier\CashierServiceProvider::class,
 
         /*
          * Application Service Providers...

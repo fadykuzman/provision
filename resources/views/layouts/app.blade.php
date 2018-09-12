@@ -19,13 +19,54 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+    .sidenav {
+        height: 100%;
+        width: 160px;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #bebebe;
+        overflow-x: hidden;
+        padding-top: 20px;
+    }
+
+    .sidenav a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #414141;
+        display: block;
+    }
+
+    .sidenav a:hover {
+        color: #f1f1f1;
+    }
+
+    .main {
+        margin-left: 160px;
+        font-size: 28px;
+        padding: 0px 10px;
+    }
+
+    @media screen and (max-height: 450px) {
+        .sidenav{padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
+    }
+    @yield('style')
+    </style>
+
+
+
 </head>
 <body>
+
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Template') }}
+                    {{ config('app.name', 'Planet Budget') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -61,18 +102,32 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('dashboard') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('dashboard-form').submit();">
+                                        {{ __('Dashboard') }}
+                                    </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
+                                    <form id="dashboard-form" action="{{ route('dashboard') }}" method="GET" style="display: none;">
+                                    </form>
                                 </div>
                             </li>
                         @endguest
+                        @auth
+                        <div class="sidenav">
+                            <a href="#">Dashboard</a>
+                            <a href="#">Subscription</a>
+                            <a href="#">Budgets</a>
+                            <a href="#">Bank Account</a>
+                        </div>
+                        @endauth
                     </ul>
                 </div>
             </div>
         </nav>
-
         <main class="py-4">
             @yield('content')
         </main>
